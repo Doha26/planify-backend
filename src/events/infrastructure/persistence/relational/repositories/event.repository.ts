@@ -136,14 +136,14 @@ export class EventRelationalRepository implements EventRepository {
 
   /**
    * Find all events for a specific participant by their ID.
-   * @param participantId The ID of the participant.
+   * @param id The ID of the participant.
    * @returns List of events the participant is involved in.
    */
-  async findByParticipantId(participantId: number): Promise<EventEntity[]> {
+  async findByParticipantId(id: number): Promise<Event[]> {
     return this.eventRepository.find({
       relations: ['participants'],
       where: {
-        participants: { id: participantId },
+        participants: { id },
       },
     });
   }

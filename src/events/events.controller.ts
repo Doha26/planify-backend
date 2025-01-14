@@ -17,6 +17,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
+  ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
@@ -33,6 +34,7 @@ import {
 import { infinityPagination } from '@/utils/infinity-pagination';
 import { FindAllEventsDto } from './dto/find-all-events.dto';
 import { AddParticipantsDto } from './dto/add-participant.dto';
+import { CheckConflictDTO } from './dto/check-conflict.dto';
 
 @ApiTags('Events')
 @ApiBearerAuth()
@@ -183,43 +185,65 @@ export class EventsController {
     return this.eventsService.remove(id);
   }
 
-  @Post()
+  @Post('/checkConflicts')
   @HttpCode(HttpStatus.OK)
+  @ApiBody({
+    description: 'Payload to check schedule conflicts',
+    schema: {
+      type: 'object',
+      properties: {
+        userIds: {
+          type: 'array',
+          items: { type: 'number' },
+          example: [1, 3, 4],
+        },
+        startTime: {
+          type: 'string',
+          format: 'date-time',
+          example: '2025-01-11T07:00:00.000Z',
+        },
+        endTime: {
+          type: 'string',
+          format: 'date-time',
+          example: '2025-01-11T16:00:00.000Z',
+        },
+      },
+    },
+  })
   @ApiOkResponse({
     description: 'Schedule conflicts detected successfully.',
     schema: {
-      example: [
-        {
-          userId: 1,
-          conflicts: [
-            {
-              id: 101,
-              title: 'Existing Event',
-              startTime: '2025-01-15T10:00:00.000Z',
-              endTime: '2025-01-15T12:00:00.000Z',
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          userId: { type: 'number', example: 1 },
+          conflicts: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                id: { type: 'number', example: 1 },
+                title: { type: 'string', example: 'Retro sprint 2' },
+                startTime: {
+                  type: 'string',
+                  format: 'date-time',
+                  example: '2025-01-11T07:00:00.000Z',
+                },
+                endTime: {
+                  type: 'string',
+                  format: 'date-time',
+                  example: '2025-01-11T16:00:00.000Z',
+                },
+              },
             },
-          ],
+          },
         },
-      ],
+      },
     },
   })
   @ApiBadRequestResponse({ description: 'Invalid input data.' })
-  async checkConflicts(
-    @Body()
-    {
-      userIds,
-      proposedStartTime,
-      proposedEndTime,
-    }: {
-      userIds: number[];
-      proposedStartTime: Date;
-      proposedEndTime: Date;
-    },
-  ) {
-    return this.eventsService.detectScheduleConflicts(
-      userIds,
-      proposedStartTime,
-      proposedEndTime,
-    );
+  async checkConflicts(@Body() checkConflitsDto: CheckConflictDTO) {
+    return this.eventsService.detectScheduleConflicts(checkConflitsDto);
   }
 }

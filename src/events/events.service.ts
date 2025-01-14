@@ -15,6 +15,7 @@ import { UsersService } from '@/users/users.service';
 import { EventPermission } from './infrastructure/persistence/relational/entities/event.entity';
 import { NullableType } from '@/utils/types/nullable.type';
 import { RequestContextService } from '@/utils/request-context-service';
+import { CheckConflictDTO } from './dto/check-conflict.dto';
 
 /**
  * Service for managing events, including creation, updating, deletion,
@@ -149,15 +150,14 @@ export class EventsService {
    * Detects scheduling conflicts for a list of users within a specified time range.
    *
    * @param userIds List of user IDs to check for conflicts.
-   * @param proposedStartTime Start time of the proposed schedule.
-   * @param proposedEndTime End time of the proposed schedule.
+   * @param startTime Start time of the proposed schedule.
+   * @param endTime End time of the proposed schedule.
    * @returns A list of users with conflicting events, including details of the conflicts.
    */
   async detectScheduleConflicts(
-    userIds: number[],
-    proposedStartTime: Date,
-    proposedEndTime: Date,
+    checkConflictDto: CheckConflictDTO,
   ): Promise<{ userId: number; conflicts: Event[] }[]> {
+    const { userIds, startTime, endTime } = checkConflictDto;
     const users = await this.usersService.findByIds(userIds);
 
     if (users.length !== userIds.length) {
@@ -170,17 +170,21 @@ export class EventsService {
       });
     }
 
+    const parsedStartTime = new Date(startTime);
+    const parsedEndTime = new Date(endTime);
+
     const conflicts = await Promise.all(
       users.map(async (user) => {
         const events = await this.eventRepository.findByParticipantId(user.id);
+
         const conflictingEvents = events.filter((event) => {
           return (
-            (proposedStartTime >= event.startTime &&
-              proposedStartTime < event.endTime) ||
-            (proposedEndTime > event.startTime &&
-              proposedEndTime <= event.endTime) ||
-            (proposedStartTime <= event.startTime &&
-              proposedEndTime >= event.endTime)
+            (parsedStartTime >= new Date(event.startTime) &&
+              parsedStartTime < new Date(event.endTime)) ||
+            (parsedEndTime > new Date(event.startTime) &&
+              parsedEndTime <= new Date(event.endTime)) ||
+            (parsedStartTime <= new Date(event.startTime) &&
+              parsedEndTime >= new Date(event.endTime))
           );
         });
 

@@ -1,0 +1,265 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "email": "foujeupavel@gmail.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "Super",
+      "lastName": "Admin",
+      "role": "admin",
+      "events": [
+        {
+          "id": 1,
+          "createdAt": "2025-01-13T22:41:59.098Z",
+          "updatedAt": "2025-01-13T23:59:45.836Z",
+          "title": "Retro sprint 2",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "personal",
+          "permissions": {
+            "1": [
+              "read_only",
+              "modify"
+            ]
+          },
+          "description": "An event to launch the product.",
+          "location": "Office",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        },
+        {
+          "id": 2,
+          "createdAt": "2025-01-13T22:41:59.104Z",
+          "updatedAt": "2025-01-13T22:41:59.104Z",
+          "title": "Team Building Retreat",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "project",
+          "permissions": null,
+          "description": "A retreat to build team morale.",
+          "location": "Remote",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2025-01-13T22:41:59.009Z",
+      "updatedAt": "2025-01-13T22:41:59.009Z",
+      "deletedAt": null
+    },
+    {
+      "id": 3,
+      "email": "test1@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "admin",
+      "events": [
+        {
+          "id": 1,
+          "createdAt": "2025-01-13T22:41:59.098Z",
+          "updatedAt": "2025-01-13T23:59:45.836Z",
+          "title": "Retro sprint 2",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "personal",
+          "permissions": {
+            "1": [
+              "read_only",
+              "modify"
+            ]
+          },
+          "description": "An event to launch the product.",
+          "location": "Office",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2025-01-13T22:45:43.093Z",
+      "updatedAt": "2025-01-13T22:45:43.093Z",
+      "deletedAt": null
+    },
+    {
+      "id": 4,
+      "email": "test5@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "admin",
+      "events": [
+        {
+          "id": 1,
+          "createdAt": "2025-01-13T22:41:59.098Z",
+          "updatedAt": "2025-01-13T23:59:45.836Z",
+          "title": "Retro sprint 2",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "personal",
+          "permissions": {
+            "1": [
+              "read_only",
+              "modify"
+            ]
+          },
+          "description": "An event to launch the product.",
+          "location": "Office",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2025-01-13T22:50:13.024Z",
+      "updatedAt": "2025-01-13T22:50:13.024Z",
+      "deletedAt": null
+    },
+    {
+      "id": 5,
+      "email": "test6@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "admin",
+      "events": [
+        {
+          "id": 1,
+          "createdAt": "2025-01-13T22:41:59.098Z",
+          "updatedAt": "2025-01-13T23:59:45.836Z",
+          "title": "Retro sprint 2",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "personal",
+          "permissions": {
+            "1": [
+              "read_only",
+              "modify"
+            ]
+          },
+          "description": "An event to launch the product.",
+          "location": "Office",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2025-01-13T22:50:50.996Z",
+      "updatedAt": "2025-01-13T22:50:50.996Z",
+      "deletedAt": null
+    },
+    {
+      "id": 6,
+      "email": "test12@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "John",
+      "lastName": "Doe",
+      "role": "admin",
+      "events": [
+        {
+          "id": 1,
+          "createdAt": "2025-01-13T22:41:59.098Z",
+          "updatedAt": "2025-01-13T23:59:45.836Z",
+          "title": "Retro sprint 2",
+          "startTime": "2025-01-11T07:00:00.000Z",
+          "endTime": "2025-01-11T16:00:00.000Z",
+          "type": "personal",
+          "permissions": {
+            "1": [
+              "read_only",
+              "modify"
+            ]
+          },
+          "description": "An event to launch the product.",
+          "location": "Office",
+          "isRecurring": false,
+          "recurrencePattern": null,
+          "__entity": "EventEntity"
+        }
+      ],
+      "status": "active",
+      "createdAt": "2025-01-14T00:59:08.266Z",
+      "updatedAt": "2025-01-14T00:59:08.266Z",
+      "deletedAt": null
+    },
+    {
+      "id": 12,
+      "email": "user.1736888435774@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "Tester1736888435774",
+      "lastName": "E2E",
+      "role": "user",
+      "events": [],
+      "status": "inactive",
+      "createdAt": "2025-01-14T21:00:35.850Z",
+      "updatedAt": "2025-01-14T21:00:35.850Z",
+      "deletedAt": null
+    },
+    {
+      "id": 10,
+      "email": "user.1736888270879@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "Tester1736888270879",
+      "lastName": "E2E",
+      "role": "user",
+      "events": [],
+      "status": "inactive",
+      "createdAt": "2025-01-14T20:57:50.954Z",
+      "updatedAt": "2025-01-14T20:57:50.954Z",
+      "deletedAt": null
+    },
+    {
+      "id": 2,
+      "email": "john.doe@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "JohnY",
+      "lastName": "Doe",
+      "role": "admin",
+      "events": [],
+      "status": "active",
+      "createdAt": "2025-01-13T22:41:59.092Z",
+      "updatedAt": "2025-01-14T22:33:11.893Z",
+      "deletedAt": null
+    },
+    {
+      "id": 16,
+      "email": "user-first.1736889012021@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "First1736889012116",
+      "lastName": "E2E",
+      "role": "user",
+      "events": [],
+      "status": "inactive",
+      "createdAt": "2025-01-14T21:10:12.193Z",
+      "updatedAt": "2025-01-14T21:10:12.193Z",
+      "deletedAt": null
+    },
+    {
+      "id": 14,
+      "email": "user.1736888905463@example.com",
+      "provider": "email",
+      "socialId": null,
+      "firstName": "Tester1736888905463",
+      "lastName": "E2E",
+      "role": "user",
+      "events": [],
+      "status": "inactive",
+      "createdAt": "2025-01-14T21:08:25.538Z",
+      "updatedAt": "2025-01-14T21:08:25.538Z",
+      "deletedAt": null
+    }
+  ],
+  "hasNextPage": true
+}
