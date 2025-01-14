@@ -1,8 +1,8 @@
 import { Repository, In, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
-import { EventDomain as Event } from '../../../../domain/event';
-import { EventRepository } from '../../event.abstract.repository';
-import { EventMapper } from '../mappers/event.mapper';
-import { IPaginationOptions } from '../../../../../utils/types/pagination-options';
+import { EventDomain as Event } from '@/events/domain/event';
+import { EventRepository } from '@/events/infrastructure/persistence/event.abstract.repository';
+import { EventMapper } from '@/events/infrastructure/persistence/relational/mappers/event.mapper';
+import { IPaginationOptions } from '@/utils/types/pagination-options';
 import {
   ForbiddenException,
   HttpStatus,
@@ -10,9 +10,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { EventEntity, EventPermission } from '../entities/event.entity';
-import { RequestContextService } from '../../../../../utils/request-context-service';
-import { UserDomain as User } from '../../../../../users/domain/user';
+import {
+  EventEntity,
+  EventPermission,
+} from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { RequestContextService } from '@/utils/request-context-service';
+import { UserDomain as User } from '@/users/domain/user';
 
 @Injectable()
 export class EventRelationalRepository implements EventRepository {

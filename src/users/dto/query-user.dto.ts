@@ -6,8 +6,8 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Transform, Type, plainToInstance } from 'class-transformer';
-import { UserDomain as User } from '../domain/user';
-import { RoleEnum } from '../../utils/shared/roles.enum';
+import { UserDomain as User } from '@/users/domain/user';
+import { RoleEnum } from '@/utils/shared/roles.enum';
 
 export class FilterUserDto {
   @ApiPropertyOptional({ enum: RoleEnum, nullable: true })

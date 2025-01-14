@@ -4,8 +4,8 @@ import { UsersService } from './users.service';
 import { RelationalUserPersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './infrastructure/persistence/relational/entities/user.entity';
-import { EventsModule } from '../events/events.module';
-import { AuthModule } from '../auth/auth.module';
+import { EventsModule } from '@/events/events.module';
+import { AuthModule } from '@/auth/auth.module';
 
 const infrastructurePersistenceModule = RelationalUserPersistenceModule;
 

@@ -1,6 +1,6 @@
-import { EventMapper } from '../../../../../events/infrastructure/persistence/relational/mappers/event.mapper';
-import { UserDomain as User } from '../../../../domain/user';
-import { UserEntity } from '../entities/user.entity';
+import { EventMapper } from '@/events/infrastructure/persistence/relational/mappers/event.mapper';
+import { UserDomain as User } from '@/users/domain/user';
+import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
 
 export class UserMapper {
   static toDomain(entityObject: UserEntity): User {

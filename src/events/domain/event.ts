@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   EventPermission,
   EventType,
-} from '../infrastructure/persistence/relational/entities/event.entity';
-import { UserDomain as User } from '../../users/domain/user';
+} from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { UserDomain as User } from '@/users/domain/user';
 
 export class EventDomain {
   @ApiProperty({

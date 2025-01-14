@@ -10,11 +10,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { AuthProvidersEnum } from '../../../../../auth/auth-providers.enum';
-import { EntityRelationalHelper } from '../../../../../utils/relational-entity-helper';
-import { EventEntity } from '../../../../../events/infrastructure/persistence/relational/entities/event.entity';
-import { RoleEnum } from '../../../../../utils/shared/roles.enum';
-import { StatusEnum } from '../../../../../utils/shared/statuses.enum';
+import { AuthProvidersEnum } from '@/auth/auth-providers.enum';
+import { EntityRelationalHelper } from '@/utils/relational-entity-helper';
+import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
 
 @Entity({
   name: 'user',

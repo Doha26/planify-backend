@@ -5,7 +5,7 @@ import {
   IsNotEmpty,
   ValidateNested,
 } from 'class-validator';
-import { EventPermission } from '../infrastructure/persistence/relational/entities/event.entity';
+import { EventPermission } from '@/events/infrastructure/persistence/relational/entities/event.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ParticipantPermissionDto {

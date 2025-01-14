@@ -8,13 +8,13 @@ import {
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventRepository } from './infrastructure/persistence/event.abstract.repository';
-import { IPaginationOptions } from '../utils/types/pagination-options';
+import { IPaginationOptions } from '@/utils/types/pagination-options';
 import { EventDomain as Event } from './domain/event';
-import { UserDomain as User } from '../users/domain/user';
-import { UsersService } from '../users/users.service';
+import { UserDomain as User } from '@/users/domain/user';
+import { UsersService } from '@/users/users.service';
 import { EventPermission } from './infrastructure/persistence/relational/entities/event.entity';
-import { NullableType } from '../utils/types/nullable.type';
-import { RequestContextService } from '../utils/request-context-service';
+import { NullableType } from '@/utils/types/nullable.type';
+import { RequestContextService } from '@/utils/request-context-service';
 
 /**
  * Service for managing events, including creation, updating, deletion,

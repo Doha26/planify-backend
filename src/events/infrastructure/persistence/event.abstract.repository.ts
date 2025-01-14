@@ -1,8 +1,8 @@
-import { UserDomain as User } from '../../../users/domain/user';
-import { DeepPartial } from '../../../utils/types/deep-partial.type';
-import { NullableType } from '../../../utils/types/nullable.type';
-import { IPaginationOptions } from '../../../utils/types/pagination-options';
-import { EventDomain as Event } from '../../domain/event';
+import { UserDomain as User } from '@/users/domain/user';
+import { DeepPartial } from '@/utils/types/deep-partial.type';
+import { NullableType } from '@/utils/types/nullable.type';
+import { IPaginationOptions } from '@/utils/types/pagination-options';
+import { EventDomain as Event } from '@/events/domain/event';
 
 export abstract class EventRepository {
   abstract create(

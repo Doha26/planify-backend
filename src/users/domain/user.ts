@@ -1,9 +1,9 @@
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { EventDomain as Event } from '../../events/domain/event';
-import { EventType } from '../../events/infrastructure/persistence/relational/entities/event.entity';
-import { RoleEnum } from '../../utils/shared/roles.enum';
-import { StatusEnum } from '../../utils/shared/statuses.enum';
+import { EventDomain as Event } from '@/events/domain/event';
+import { EventType } from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
 
 export class UserDomain {
   @ApiProperty({

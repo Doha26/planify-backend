@@ -3,7 +3,7 @@ import { IsNotEmpty, IsObject, IsOptional } from 'class-validator';
 import {
   EventType,
   EventPermission,
-} from '../infrastructure/persistence/relational/entities/event.entity';
+} from '@/events/infrastructure/persistence/relational/entities/event.entity';
 import { ParticipantPermissionDto } from './add-participant.dto';
 
 export class CreateEventDto {

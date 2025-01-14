@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { Repository } from 'typeorm';
 import bcrypt from 'bcryptjs';
-import { RoleEnum } from '../../../utils/shared/roles.enum';
-import { StatusEnum } from '../../../utils/shared/statuses.enum';
-import { UserEntity } from '../../../users/infrastructure/persistence/relational/entities/user.entity';
-import { EventEntity } from '../../../events/infrastructure/persistence/relational/entities/event.entity';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
+import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
+import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
 
 @Injectable()
 export class UserSeedService {

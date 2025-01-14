@@ -6,18 +6,18 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { NullableType } from '../utils/types/nullable.type';
+import { NullableType } from '@/utils/types/nullable.type';
 import { FilterUserDto, SortUserDto } from './dto/query-user.dto';
 import { UserRepository } from './infrastructure/persistence/user.abstract.repository';
 import { UserDomain as User } from './domain/user';
 import bcrypt from 'bcryptjs';
-import { AuthProvidersEnum } from '../auth/auth-providers.enum';
-import { IPaginationOptions } from '../utils/types/pagination-options';
+import { AuthProvidersEnum } from '@/auth/auth-providers.enum';
+import { IPaginationOptions } from '@/utils/types/pagination-options';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { EventDomain as Event } from '../events/domain/event';
-import { EventsService } from '../events/events.service';
-import { RoleEnum } from '../utils/shared/roles.enum';
-import { StatusEnum } from '../utils/shared/statuses.enum';
+import { EventDomain as Event } from '@/events/domain/event';
+import { EventsService } from '@/events/events.service';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
 
 @Injectable()
 export class UsersService {

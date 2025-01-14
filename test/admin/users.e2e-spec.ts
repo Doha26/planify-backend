@@ -1,7 +1,7 @@
 import { APP_URL, ADMIN_EMAIL, ADMIN_PASSWORD } from '../utils/constants';
 import request from 'supertest';
-import { RoleEnum } from '../../src/utils/shared/roles.enum';
-import { StatusEnum } from '../../src/utils/shared/statuses.enum';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
 
 describe('Users Module', () => {
   const app = APP_URL;
@@ -99,10 +99,10 @@ describe('Users Module', () => {
             firstName: `UserByAdmin${Date.now()}`,
             lastName: 'E2E',
             role: {
-              id: RoleEnum.user,
+              id: RoleEnum.USER,
             },
             status: {
-              id: StatusEnum.active,
+              id: StatusEnum.ACTIVE,
             },
           })
           .expect(201);

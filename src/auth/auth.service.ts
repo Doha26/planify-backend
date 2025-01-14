@@ -14,19 +14,19 @@ import { AuthEmailLoginDto } from './dto/auth-email-login.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { AuthProvidersEnum } from './auth-providers.enum';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
-import { NullableType } from '../utils/types/nullable.type';
+import { NullableType } from '@/utils/types/nullable.type';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { ConfigService } from '@nestjs/config';
 import { JwtRefreshPayloadType } from './strategies/types/jwt-refresh-payload.type';
 import { JwtPayloadType } from './strategies/types/jwt-payload.type';
-import { UsersService } from '../users/users.service';
-import { AllConfigType } from '../config/config.type';
-import { Session } from '../session/domain/session';
-import { SessionService } from '../session/session.service';
-import { StatusEnum } from '../utils/shared/statuses.enum';
-import { UserDomain as User } from '../users/domain/user';
-import { UpdateUserDto } from '../users/dto/update-user.dto';
-import { MailService } from '../mail/mail.service';
+import { UsersService } from '@/users/users.service';
+import { AllConfigType } from '@/config/config.type';
+import { Session } from '@/session/domain/session';
+import { SessionService } from '@/session/session.service';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
+import { UserDomain as User } from '@/users/domain/user';
+import { UpdateUserDto } from '@/users/dto/update-user.dto';
+import { MailService } from '@/mail/mail.service';
 
 @Injectable()
 export class AuthService {
@@ -351,7 +351,7 @@ export class AuthService {
    */
 
   async me(userJwtPayload: JwtPayloadType): Promise<NullableType<User>> {
-    return this.usersService.findById(userJwtPayload.id);
+    return await this.usersService.findById(userJwtPayload.id);
   }
 
   /**
@@ -502,7 +502,7 @@ export class AuthService {
    * @returns A promise that resolves once the session is deleted.
    */
   async logout(data: Pick<JwtRefreshPayloadType, 'sessionId'>) {
-    return this.sessionService.deleteById(data.sessionId);
+    return await this.sessionService.deleteById(data.sessionId);
   }
 
   /**

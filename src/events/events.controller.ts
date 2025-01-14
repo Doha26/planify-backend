@@ -29,8 +29,8 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   InfinityPaginationResponse,
   InfinityPaginationResponseDto,
-} from '../utils/dto/infinity-pagination-response.dto';
-import { infinityPagination } from '../utils/infinity-pagination';
+} from '@/utils/dto/infinity-pagination-response.dto';
+import { infinityPagination } from '@/utils/infinity-pagination';
 import { FindAllEventsDto } from './dto/find-all-events.dto';
 import { AddParticipantsDto } from './dto/add-participant.dto';
 

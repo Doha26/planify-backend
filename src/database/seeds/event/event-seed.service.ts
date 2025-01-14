@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { StatusEnum } from '../../../utils/shared/statuses.enum';
-import { UserEntity } from '../../../users/infrastructure/persistence/relational/entities/user.entity';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
+import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
 import {
   EventEntity,
   EventType,
-} from '../../../events/infrastructure/persistence/relational/entities/event.entity';
+} from '@/events/infrastructure/persistence/relational/entities/event.entity';
 
 @Injectable()
 export class EventSeedService {

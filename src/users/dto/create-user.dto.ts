@@ -9,9 +9,9 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { lowerCaseTransformer } from '../../utils/transformers/lower-case.transformer';
-import { RoleEnum } from '../../utils/shared/roles.enum';
-import { StatusEnum } from '../../utils/shared/statuses.enum';
+import { lowerCaseTransformer } from '@/utils/transformers/lower-case.transformer';
+import { RoleEnum } from '@/utils/shared/roles.enum';
+import { StatusEnum } from '@/utils/shared/statuses.enum';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'test1@example.com', type: String, nullable: false })

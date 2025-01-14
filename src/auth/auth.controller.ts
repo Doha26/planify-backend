@@ -21,8 +21,8 @@ import { AuthUpdateDto } from './dto/auth-update.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
-import { NullableType } from '../utils/types/nullable.type';
-import { UserDomain as User } from '../users/domain/user';
+import { NullableType } from '@/utils/types/nullable.type';
+import { UserDomain as User } from '@/users/domain/user';
 import { RefreshResponseDto } from './dto/refresh-response.dto';
 
 @ApiTags('Auth')
