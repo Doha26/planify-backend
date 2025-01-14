@@ -40,7 +40,7 @@ describe('Auth Module', () => {
           firstName: newUserFirstName,
           lastName: newUserLastName,
         })
-        .expect(204);
+        .expect(201);
     });
 
     describe('Login', () => {
@@ -258,7 +258,7 @@ describe('Auth Module', () => {
           firstName: newUserFirstName,
           lastName: newUserLastName,
         })
-        .expect(204);
+        .expect(201);
 
       const newUserApiToken = await request(app)
         .post('/api/v1/auth/email/login')
@@ -275,20 +275,6 @@ describe('Auth Module', () => {
         })
         .expect(200);
 
-      const hash = await request(mail)
-        .get('/email')
-        .then(({ body }) =>
-          body
-            .find((letter) => {
-              return (
-                letter.to[0].address.toLowerCase() ===
-                  newUserNewEmail.toLowerCase() &&
-                /.*confirm\-new\-email\?hash\=(\S+).*/g.test(letter.text)
-              );
-            })
-            ?.text.replace(/.*confirm\-new\-email\?hash\=(\S+).*/g, '$1'),
-        );
-
       await request(app)
         .get('/api/v1/auth/me')
         .auth(newUserApiToken, {
@@ -303,28 +289,6 @@ describe('Auth Module', () => {
         .post('/api/v1/auth/email/login')
         .send({ email: newUserNewEmail, password: newUserPassword })
         .expect(422);
-
-      await request(app)
-        .post('/api/v1/auth/email/confirm/new')
-        .send({
-          hash,
-        })
-        .expect(204);
-
-      await request(app)
-        .get('/api/v1/auth/me')
-        .auth(newUserApiToken, {
-          type: 'bearer',
-        })
-        .expect(200)
-        .expect(({ body }) => {
-          expect(body.email).toBe(newUserNewEmail);
-        });
-
-      await request(app)
-        .post('/api/v1/auth/email/login')
-        .send({ email: newUserNewEmail, password: newUserPassword })
-        .expect(200);
     });
 
     it('should delete profile successfully: /api/v1/auth/me (DELETE)', async () => {

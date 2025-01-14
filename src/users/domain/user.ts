@@ -32,7 +32,7 @@ export class UserDomain {
     type: String,
     example: '1234567890',
   })
-  @Expose({ groups: ['me', 'admin'] })
+  @Expose({ groups: ['admin'] })
   socialId?: string | null;
 
   @ApiProperty({
@@ -68,8 +68,11 @@ export class UserDomain {
   @ApiProperty()
   deletedAt: Date | null;
 
-  @ApiProperty()
-  groups: string[];
+  @ApiProperty({
+    enum: RoleEnum,
+    enumName: 'RoleEnum',
+  })
+  groups: RoleEnum[];
 
   @ApiProperty({
     enum: EventType,

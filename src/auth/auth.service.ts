@@ -1,6 +1,7 @@
 import {
   HttpStatus,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -125,48 +126,69 @@ export class AuthService {
   async register(dto: AuthRegisterLoginDto): Promise<User | null> {
     let user: User | null = null;
     try {
-      if (dto.email) {
-        user = await this.usersService.create({
-          ...dto,
-          email: dto.email,
-          role: dto.role,
-          status: dto.status,
-          events: dto.events,
-          provider: 'email',
-          socialId: null,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          deletedAt: null,
-          groups: dto.groups,
-        });
-        const hash = await this.jwtService.signAsync(
-          {
-            confirmEmailUserId: user.id,
-          },
-          {
-            secret: this.configService.getOrThrow('auth.confirmEmailSecret', {
-              infer: true,
-            }),
-            expiresIn: this.configService.getOrThrow(
-              'auth.confirmEmailExpires',
-              {
-                infer: true,
-              },
-            ),
-          },
-        );
-        await this.mailService.userSignUp({
-          to: dto.email,
-          data: {
-            hash,
-          },
-        });
+      if (!dto.email) {
+        throw new UnprocessableEntityException('Email is required');
       }
-    } catch (error) {
-      throw new Error(error);
-    }
 
-    return user ?? null;
+      user = await this.usersService.create({
+        ...dto,
+        email: dto.email,
+        role: dto.role,
+        status: dto.status,
+        events: dto.events,
+        provider: 'email',
+        socialId: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
+        groups: dto.groups,
+      });
+
+      if (!user) {
+        throw new UnprocessableEntityException('User creation failed');
+      }
+      const hash = await this.jwtService.signAsync(
+        {
+          confirmEmailUserId: user.id,
+        },
+        {
+          secret: this.configService.getOrThrow('auth.confirmEmailSecret', {
+            infer: true,
+          }),
+          expiresIn: this.configService.getOrThrow('auth.confirmEmailExpires', {
+            infer: true,
+          }),
+        },
+      );
+      await this.mailService.userSignUp({
+        to: dto.email,
+        data: {
+          hash,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      if (error instanceof UnprocessableEntityException) {
+        // This is an expected validation failure
+        throw error;
+      }
+
+      // Handle errors related to user creation
+      if (
+        error.message.includes('user creation failed') ||
+        error.message.includes('email')
+      ) {
+        throw new UnprocessableEntityException(
+          'Failed to register user or send confirmation email',
+        );
+      }
+
+      // Handle unexpected errors like database failures, etc.
+      throw new InternalServerErrorException(
+        'An unexpected error occurred during registration',
+      );
+    }
   }
 
   /**

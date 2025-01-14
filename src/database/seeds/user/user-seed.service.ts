@@ -43,7 +43,7 @@ export class UserSeedService {
           createdAt: new Date(),
           updatedAt: new Date(),
           deletedAt: null,
-          groups: ['admin'],
+          groups: [RoleEnum.ADMIN],
         }),
       );
     }
@@ -64,7 +64,7 @@ export class UserSeedService {
           lastName: 'Doe',
           email: 'john.doe@example.com',
           password,
-          role: RoleEnum.USER,
+          role: RoleEnum.ADMIN,
           status: StatusEnum.ACTIVE,
         }),
       );

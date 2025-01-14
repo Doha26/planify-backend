@@ -57,7 +57,7 @@ export class CreateUserDto {
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  groups?: string[];
+  groups?: RoleEnum[];
 
   @ApiPropertyOptional({ example: new Date().toISOString(), type: Date })
   @IsOptional()

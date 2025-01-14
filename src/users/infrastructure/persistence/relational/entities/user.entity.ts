@@ -52,8 +52,8 @@ export class UserEntity extends EntityRelationalHelper {
   @Column({ type: 'enum', enum: StatusEnum, default: StatusEnum.INACTIVE })
   status: StatusEnum;
 
-  @Column('simple-array', { default: [] })
-  groups: string[];
+  @Column({ type: 'enum', enum: RoleEnum, default: RoleEnum.USER })
+  groups: RoleEnum[];
 
   @CreateDateColumn()
   createdAt: Date;

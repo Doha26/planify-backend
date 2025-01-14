@@ -71,7 +71,7 @@ export class UsersService {
 
     const provider = createUserDto.provider ?? AuthProvidersEnum.email;
 
-    let groups: string[] = [];
+    let groups: RoleEnum[] = [];
     if (createUserDto.groups && Array.isArray(createUserDto.groups)) {
       groups = createUserDto.groups;
     }

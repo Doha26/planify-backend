@@ -22,6 +22,7 @@
 |-- eslint.config.mjs
 |-- maildev.Dockerfile
 |-- nest-cli.json
+|-- package-lock.json
 |-- package.json
 |-- renovate.json
 |-- src
