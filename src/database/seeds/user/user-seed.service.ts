@@ -17,6 +17,9 @@ export class UserSeedService {
   ) {}
 
   async run() {
+    // Delete all users before seed to avoir seed confits on user email if schema already exist
+    await this.repository.delete({});
+
     const countAdmin = await this.repository.count({
       where: {
         role: RoleEnum.ADMIN,
