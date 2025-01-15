@@ -7,6 +7,9 @@ A robust NestJS backend application providing authentication, user management, e
 [![NestJS](https://img.shields.io/badge/NestJS-10.4.15-red.svg)](https://nestjs.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![Screenshot 1](./screenshots/global.png)
+![Screenshot 1](./screenshots/view-2.png)
+
 ## Features
 
 - 🔐 JWT Authentication and Authorization
@@ -196,19 +199,8 @@ Detailed documentation is available in the `/docs` directory:
 
 - [Architecture Overview](docs/architecture.md)
 - [Authentication](docs/auth.md)
-- [Database Management](docs/database.md)
-- [File Uploading](docs/file-uploading.md)
 - [Testing Guidelines](docs/tests.md)
 - [CLI Usage](docs/cli.md)
-
-## Contributing
-
-1. Create a feature branch
-2. Commit changes using conventional commits (project is Commitizen-friendly)
-3. Push your branch
-4. Submit a pull request
-
-The project uses Husky for git hooks and commitlint for commit message validation.
 
 ## Scripts Reference
 
@@ -243,6 +235,220 @@ MAIL_USER=user
 MAIL_PASSWORD=password
 ```
 
+## Complete Project Structure
+
+```
+|-- .env
+|-- .gitignore
+|-- .hygen.js
+|-- .nvmrc
+|-- .prettierrc
+|-- Dockerfile
+|-- LICENSE
+|-- Procfile
+|-- README.md
+|-- commitlint.config.js
+|-- docker-compose.ci.yaml
+|-- docker-compose.test.yaml
+|-- docker-compose.yaml
+|-- docs
+    |-- architecture.md
+    |-- auth.md
+    |-- cli.md
+    |-- readme.md
+    |-- tests.md
+|-- e2e.Dockerfile
+|-- env-example
+|-- eslint.config.mjs
+|-- maildev.Dockerfile
+|-- nest-cli.json
+|-- package-lock.json
+|-- package.json
+|-- renovate.json
+|-- src
+    |-- app.module.ts
+    |-- auth
+        |-- auth-providers.enum.ts
+        |-- auth.controller.ts
+        |-- auth.module.ts
+        |-- auth.service.ts
+        |-- config
+            |-- auth-config.type.ts
+            |-- auth.config.ts
+        |-- dto
+            |-- auth-confirm-email.dto.ts
+            |-- auth-email-login.dto.ts
+            |-- auth-forgot-password.dto.ts
+            |-- auth-register-login.dto.ts
+            |-- auth-reset-password.dto.ts
+            |-- auth-update.dto.ts
+            |-- login-response.dto.ts
+            |-- refresh-response.dto.ts
+        |-- strategies
+            |-- anonymous.strategy.ts
+            |-- jwt-refresh.strategy.ts
+            |-- jwt.strategy.ts
+            |-- types
+                |-- jwt-payload.type.ts
+                |-- jwt-refresh-payload.type.ts
+    |-- config
+        |-- app-config.type.ts
+        |-- app.config.ts
+        |-- config.type.ts
+    |-- database
+        |-- config
+            |-- database-config.type.ts
+            |-- database.config.ts
+        |-- data-source.ts
+        |-- migrations
+            |-- 1736807938921-CreateUserAndEventEntities.ts
+        |-- seeds
+            |-- event
+                |-- event-seed.module.ts
+                |-- event-seed.service.ts
+            |-- run-seed.ts
+            |-- seed.module.ts
+            |-- user
+                |-- user-seed.module.ts
+                |-- user-seed.service.ts
+        |-- typeorm-config.service.ts
+    |-- events
+        |-- domain
+            |-- event.ts
+        |-- dto
+            |-- add-participant.dto.ts
+            |-- check-conflict.dto.ts
+            |-- create-event.dto.ts
+            |-- event.dto.ts
+            |-- find-all-events.dto.ts
+            |-- update-event.dto.ts
+        |-- events.controller.ts
+        |-- events.module.ts
+        |-- events.service.ts
+        |-- infrastructure
+            |-- persistence
+                |-- event.abstract.repository.ts
+                |-- relational
+                    |-- entities
+                        |-- event.entity.ts
+                    |-- mappers
+                        |-- event.mapper.ts
+                    |-- relational-persistence.module.ts
+                    |-- repositories
+                        |-- event.repository.ts
+    |-- home
+        |-- home.controller.ts
+        |-- home.module.ts
+        |-- home.service.ts
+    |-- i18n
+        |-- en
+            |-- common.json
+            |-- confirm-email.json
+            |-- confirm-new-email.json
+            |-- reset-password.json
+    |-- mail
+        |-- config
+            |-- mail-config.type.ts
+            |-- mail.config.ts
+        |-- interfaces
+            |-- mail-data.interface.ts
+        |-- mail-templates
+            |-- activation.hbs
+            |-- confirm-new-email.hbs
+            |-- reset-password.hbs
+        |-- mail.module.ts
+        |-- mail.service.ts
+    |-- mailer
+        |-- mailer.module.ts
+        |-- mailer.service.ts
+    |-- main.ts
+    |-- session
+        |-- domain
+            |-- session.ts
+        |-- infrastructure
+            |-- persistence
+                |-- relational
+                    |-- entities
+                        |-- session.entity.ts
+                    |-- mappers
+                        |-- session.mapper.ts
+                    |-- relational-persistence.module.ts
+                    |-- repositories
+                        |-- session.repository.ts
+                |-- session.repository.ts
+        |-- session.module.ts
+        |-- session.service.ts
+    |-- social
+        |-- interfaces
+            |-- social.interface.ts
+        |-- tokens.ts
+    |-- users
+        |-- domain
+            |-- user.ts
+            |-- users.json
+        |-- dto
+            |-- create-user.dto.ts
+            |-- query-user.dto.ts
+            |-- update-user.dto.ts
+        |-- infrastructure
+            |-- persistence
+                |-- relational
+                    |-- entities
+                        |-- user.entity.ts
+                    |-- mappers
+                        |-- user.mapper.ts
+                    |-- relational-persistence.module.ts
+                    |-- repositories
+                        |-- user.repository.ts
+                |-- user.abstract.repository.ts
+        |-- users.controller.ts
+        |-- users.module.ts
+        |-- users.service.ts
+    |-- utils
+        |-- deep-resolver.ts
+        |-- dto
+            |-- infinity-pagination-response.dto.ts
+        |-- infinity-pagination.ts
+        |-- relational-entity-helper.ts
+        |-- request-context-middleware.ts
+        |-- request-context-service.ts
+        |-- request.context.module.ts
+        |-- serializer.interceptor.ts
+        |-- shared
+            |-- current-user.decorators.ts
+            |-- roles.decorator.ts
+            |-- roles.enum.ts
+            |-- roles.guard.ts
+            |-- statuses.enum.ts
+        |-- transformers
+            |-- lower-case.transformer.ts
+        |-- types
+            |-- deep-partial.type.ts
+            |-- index.d.ts
+            |-- maybe.type.ts
+            |-- nullable.type.ts
+            |-- or-never.type.ts
+            |-- pagination-options.ts
+        |-- validate-config.ts
+        |-- validation-options.ts
+|-- startup.ci.sh
+|-- startup.dev.sh
+|-- startup.test.sh
+|-- test
+    |-- admin
+        |-- auth.e2e-spec.ts
+        |-- users.e2e-spec.ts
+    |-- jest-e2e.json
+    |-- user
+        |-- auth.e2e-spec.ts
+    |-- utils
+        |-- constants.ts
+|-- test.Dockerfile
+|-- tsconfig.build.json
+|-- tsconfig.json
+|-- wait-for-it.sh
+
+```
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

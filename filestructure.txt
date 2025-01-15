@@ -22,9 +22,11 @@
 |-- eslint.config.mjs
 |-- maildev.Dockerfile
 |-- nest-cli.json
-|-- package-lock.json
 |-- package.json
 |-- renovate.json
+|-- screenshots
+    |-- global.png
+    |-- view-2.png
 |-- src
     |-- app.module.ts
     |-- auth
