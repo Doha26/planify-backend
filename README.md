@@ -34,12 +34,11 @@ npm >= 8.0.0
 PostgreSQL
 Docker (optional)
 ```
-
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/Doha26/planify-backend.git
 cd planify-backend
 ```
 
@@ -58,7 +57,7 @@ cp env-example .env
 ## Running the Application
 
 ```bash
-# Development
+# Development (This launches the NestJS Backend on port localhost:3000 and the maildev client app on localhost:1080)
 npm run start:dev
 
 # Development with SWC (faster)
@@ -70,10 +69,13 @@ npm run start:debug
 # Production mode
 npm run start:prod
 ```
+## Preview 
 
-## Database Management
+- [localhost:3000 - Swagger Documentation](http://localhost:3000/swagger) - API documentation interface.
+- [localhost:1080 - MailDev](http://localhost:1080) - Email testing tool.
 
-### Migrations
+
+## Database Migrations
 
 ```bash
 # Generate a migration
