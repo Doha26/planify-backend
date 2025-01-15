@@ -22,6 +22,8 @@
 |-- env-example
 |-- eslint.config.mjs
 |-- maildev.Dockerfile
+|-- media
+    |-- demo-preview.mov
 |-- nest-cli.json
 |-- package.json
 |-- renovate.json

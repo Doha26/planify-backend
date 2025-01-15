@@ -30,7 +30,7 @@ A robust NestJS backend application providing authentication, user management, e
 
 ```bash
 Node.js >= 16.0.0
-npm >= 8.0.0
+yarn
 PostgreSQL
 Docker (optional)
 ```
@@ -44,7 +44,7 @@ cd planify-backend
 
 2. Install dependencies:
 ```bash
-npm install
+yarn install
 ```
 
 3. Set up environment variables:
@@ -57,51 +57,59 @@ cp env-example .env
 ## Running the Application
 
 ```bash
+# Run DB migrations
+yarn migration:run
+
+# Run seeds
+yarn seed:run
+
 # Development (This launches the NestJS Backend on port localhost:3000 and the maildev client app on localhost:1080)
-npm run start:dev
+yarn start:dev
 
 # Development with SWC (faster)
-npm run start:swc
+yarn start:swc
 
 # Debug mode
-npm run start:debug
+yarn start:debug
 
 # Production mode
-npm run start:prod
+yarn start:prod
 ```
-## Preview 
 
+## Preview 
 - [localhost:3000 - Swagger Documentation](http://localhost:3000/swagger) - API documentation interface.
 - [localhost:1080 - MailDev](http://localhost:1080) - Email testing tool.
 
+## Demo
+[Watch the demo](./media/demo-preview.mov)
 
 ## Database Migrations
 
 ```bash
-# Generate a migration
-npm run migration:generate -- src/database/migrations/[MigrationName]
+# Generate a new migration
+yarn migration:generate -- src/database/migrations/[MigrationName]
 
 # Create empty migration
-npm run migration:create -- src/database/migrations/[MigrationName]
+yarn migration:create -- src/database/migrations/[MigrationName]
 
 # Run migrations
-npm run migration:run
+yarn migration:run
 
 # Revert migrations
-npm run migration:revert
+yarn migration:revert
 
 # Drop schema
-npm run schema:drop
+yarn schema:drop
 ```
 
 ### Seeding
 
 ```bash
 # Create a seed
-npm run seed:create
+yarn seed:create
 
 # Run seeds
-npm run seed:run
+yarn seed:run
 ```
 
 ## Development Tools
@@ -110,42 +118,42 @@ npm run seed:run
 
 ```bash
 # Generate a new resource
-npm run generate:resource
+yarn generate:resource
 
 # Add property to existing resource
-npm run add:property
+yarn add:property
 ```
 
 ### Code Quality
 
 ```bash
 # Run ESLint
-npm run lint
+yarn lint
 
 # Format code
-npm run format
+yarn format
 ```
 
 ## Testing
 
 ```bash
 # Unit tests
-npm run test
+yarn test
 
 # Watch mode
-npm run test:watch
+yarn test:watch
 
 # Test coverage
-npm run test:cov
+yarn test:cov
 
 # E2E tests
-npm run test:e2e
+yarn test:e2e
 
 # Debug tests
-npm run test:debug
+yarn test:debug
 
 # E2E tests with Docker
-npm run test:e2e:docker
+yarn test:e2e:docker
 ```
 
 ## Docker Support
@@ -190,7 +198,7 @@ The project uses Renovate for automated dependency updates. Configuration can be
 
 ```bash
 # Create a new release
-npm run release
+yarn release
 ```
 
 Release configuration is managed through `release-it` in package.json. The project follows semantic versioning.
@@ -208,14 +216,14 @@ Detailed documentation is available in the `/docs` directory:
 
 | Script | Description |
 |--------|-------------|
-| `npm run start:dev` | Start the application in development mode |
-| `npm run start:swc` | Start with SWC for faster development |
-| `npm run test` | Run unit tests |
-| `npm run test:e2e` | Run end-to-end tests |
-| `npm run migration:run` | Execute database migrations |
-| `npm run seed:run` | Run database seeds |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
+| `yarn start:dev` | Start the application in development mode |
+| `yarn start:swc` | Start with SWC for faster development |
+| `yarn test` | Run unit tests |
+| `yarn test:e2e` | Run end-to-end tests |
+| `yarn migration:run` | Execute database migrations |
+| `yarn seed:run` | Run database seeds |
+| `yarn lint` | Run ESLint |
+| `yarn format` | Format code with Prettier |
 
 ## Environment Variables
 
