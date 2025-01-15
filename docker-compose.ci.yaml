@@ -15,16 +15,9 @@ services:
     expose:
       - 1080
       - 1025
-
-  # Uncomment to use redis
-  # redis:
-  #   image: redis:7-alpine
-  #   expose:
-  #     - 6379
-
   api:
     build:
       context: .
-      dockerfile: relational.e2e.Dockerfile
+      dockerfile: e2e.Dockerfile
     env_file:
-      - env-example-relational
+      - env-example

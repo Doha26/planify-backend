@@ -15,19 +15,12 @@ services:
     expose:
       - 1080
       - 1025
-
-  # Uncomment to use redis
-  # redis:
-  #   image: redis:7-alpine
-  #   expose:
-  #     - 6379
-
   api:
     build:
       context: .
-      dockerfile: relational.test.Dockerfile
+      dockerfile: test.Dockerfile
     env_file:
-      - env-example-relational
+      - env-example
     volumes:
       - ./src:/usr/src/app/src
       - ./test:/usr/src/app/test
