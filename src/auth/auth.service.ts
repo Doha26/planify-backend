@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   HttpStatus,
   Injectable,
   InternalServerErrorException,
@@ -222,10 +223,17 @@ export class AuthService {
 
     const user = await this.usersService.findById(userId);
 
-    if (!user || user?.status?.toString() !== StatusEnum.INACTIVE.toString()) {
+    if (!user) {
       throw new NotFoundException({
         status: HttpStatus.NOT_FOUND,
-        error: `notFound`,
+        error: `Unable to find user assocated with this hash`,
+      });
+    }
+
+    if (user?.status !== StatusEnum.INACTIVE) {
+      throw new ConflictException({
+        status: HttpStatus.CONFLICT,
+        error: `This user account is already active`,
       });
     }
 
