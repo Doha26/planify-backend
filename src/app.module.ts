@@ -27,6 +27,8 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   },
 });
 
+export const isProd = process.env.NODE_ENV === 'production';
+
 @Module({
   imports: [
     DevtoolsModule.register({
