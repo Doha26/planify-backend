@@ -29,7 +29,7 @@ A robust NestJS backend application providing authentication, user management, e
 ## Prerequisites
 
 ```bash
-Node.js >= 16.0.0
+Node.js >= 20
 yarn
 PostgreSQL
 Docker (optional)

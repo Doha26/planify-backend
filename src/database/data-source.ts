@@ -37,6 +37,6 @@ export const AppDataSource = new DataSource({
             key: process.env.DATABASE_KEY ?? undefined,
             cert: process.env.DATABASE_CERT ?? undefined,
           }
-        : undefined,
+        : false,
   },
 } as DataSourceOptions);
