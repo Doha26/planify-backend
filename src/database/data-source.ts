@@ -39,7 +39,10 @@ export const AppDataSource = new DataSource({
             cert: process.env.DATABASE_CERT ?? undefined,
           }
         : isProd
-          ? true
+          ? {
+              require: true,
+              rejectUnauthorized: false,
+            }
           : false,
   },
 } as DataSourceOptions);
