@@ -51,7 +51,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
                 undefined,
             }
           : isProd
-            ? true
+            ? {
+                require: true,
+                rejectUnauthorized: false,
+              }
             : false,
       },
     } as TypeOrmModuleOptions;
