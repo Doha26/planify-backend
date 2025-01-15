@@ -6,17 +6,21 @@ import { RoleEnum } from '@/utils/shared/roles.enum';
 import { StatusEnum } from '@/utils/shared/statuses.enum';
 import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
 import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { SessionEntity } from '@/session/infrastructure/persistence/relational/entities/session.entity';
 
 @Injectable()
 export class UserSeedService {
   constructor(
     @InjectRepository(UserEntity)
     private repository: Repository<UserEntity>,
+    @InjectRepository(SessionEntity)
+    private sessionRepository: Repository<UserEntity>,
     @InjectRepository(EventEntity)
     private eventRepository: Repository<EventEntity>,
   ) {}
 
   async run() {
+    await this.sessionRepository.delete({});
     // Delete all users before seed to avoir seed confits on user email if schema already exist
     await this.repository.delete({});
 

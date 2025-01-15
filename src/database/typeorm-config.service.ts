@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { AllConfigType } from '@/config/config.type';
+import { isProd } from '@/app.module';
 
 @Injectable()
 export class TypeOrmConfigService implements TypeOrmOptionsFactory {
@@ -49,10 +50,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
                 this.configService.get('database.cert', { infer: true }) ??
                 undefined,
             }
-          : {
-              require: true,
-              rejectUnauthorized: false,
-            },
+          : isProd
+            ? true
+            : false,
       },
     } as TypeOrmModuleOptions;
   }

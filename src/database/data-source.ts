@@ -1,3 +1,4 @@
+import { isProd } from '@/app.module';
 import 'reflect-metadata';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
@@ -37,9 +38,8 @@ export const AppDataSource = new DataSource({
             key: process.env.DATABASE_KEY ?? undefined,
             cert: process.env.DATABASE_CERT ?? undefined,
           }
-        : {
-            require: true,
-            rejectUnauthorized: false,
-          },
+        : isProd
+          ? true
+          : false,
   },
 } as DataSourceOptions);
