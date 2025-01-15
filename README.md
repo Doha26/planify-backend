@@ -7,6 +7,9 @@ A robust NestJS backend application providing authentication, user management, e
 [![NestJS](https://img.shields.io/badge/NestJS-10.4.15-red.svg)](https://nestjs.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Test the API 
+ [👉👉 Test the API 👈👈](https://planify-backend-9e28892a5c2f.herokuapp.com/docs)
+
 ![Screenshot 1](./screenshots/global.png)
 ![Screenshot 1](./screenshots/view-2.png)
 
@@ -25,6 +28,8 @@ A robust NestJS backend application providing authentication, user management, e
 - 🔍 ESLint + Prettier Code Quality
 - 🔄 CI/CD with GitHub Actions
 - 🚀 SWC Support for Faster Development
+
+
 
 ## Prerequisites
 
@@ -80,7 +85,7 @@ yarn start:prod
 - [localhost:3000 - Swagger Documentation](http://localhost:3000/swagger) - API documentation interface.
 - [localhost:1080 - MailDev](http://localhost:1080) - Email testing tool.
 
-## Demo
+## Demo Video
 [Watch the demo](./media/demo-preview.mov)
 
 ## Database Migrations
