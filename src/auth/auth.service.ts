@@ -146,11 +146,13 @@ export class AuthService {
         groups: dto.groups,
       });
 
+      if (!user) {
+        throw new UnprocessableEntityException('User creation failed');
+      }
+
       if (!isProd) {
         // Only send mail for now in dev envronment using maildev
-        if (!user) {
-          throw new UnprocessableEntityException('User creation failed');
-        }
+
         const hash = await this.jwtService.signAsync(
           {
             confirmEmailUserId: user.id,
