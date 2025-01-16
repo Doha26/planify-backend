@@ -29,6 +29,7 @@ import { StatusEnum } from '@/utils/shared/statuses.enum';
 import { UserDomain as User } from '@/users/domain/user';
 import { UpdateUserDto } from '@/users/dto/update-user.dto';
 import { MailService } from '@/mail/mail.service';
+import { isProd } from '@/app.module';
 
 @Injectable()
 export class AuthService {
@@ -145,28 +146,34 @@ export class AuthService {
         groups: dto.groups,
       });
 
-      if (!user) {
-        throw new UnprocessableEntityException('User creation failed');
+      if (!isProd) {
+        // Only send mail for now in dev envronment using maildev
+        if (!user) {
+          throw new UnprocessableEntityException('User creation failed');
+        }
+        const hash = await this.jwtService.signAsync(
+          {
+            confirmEmailUserId: user.id,
+          },
+          {
+            secret: this.configService.getOrThrow('auth.confirmEmailSecret', {
+              infer: true,
+            }),
+            expiresIn: this.configService.getOrThrow(
+              'auth.confirmEmailExpires',
+              {
+                infer: true,
+              },
+            ),
+          },
+        );
+        await this.mailService.userSignUp({
+          to: dto.email,
+          data: {
+            hash,
+          },
+        });
       }
-      const hash = await this.jwtService.signAsync(
-        {
-          confirmEmailUserId: user.id,
-        },
-        {
-          secret: this.configService.getOrThrow('auth.confirmEmailSecret', {
-            infer: true,
-          }),
-          expiresIn: this.configService.getOrThrow('auth.confirmEmailExpires', {
-            infer: true,
-          }),
-        },
-      );
-      await this.mailService.userSignUp({
-        to: dto.email,
-        data: {
-          hash,
-        },
-      });
 
       return user;
     } catch (error) {
