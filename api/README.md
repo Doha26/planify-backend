@@ -1,3 +1,258 @@
+# Planify Backend
+
+A robust NestJS backend application providing authentication, user management, event handling, and email capabilities. Built with TypeScript and follows clean architecture principles.
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.7.4-blue.svg)](https://www.typescriptlang.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10.4.15-red.svg)](https://nestjs.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Test the API 
+ [👉👉 Test the API 👈👈](https://planify-backend-9e28892a5c2f.herokuapp.com/docs)
+
+![Screenshot 1](./screenshots/global.png)
+![Screenshot 1](./screenshots/view-2.png)
+
+## Features
+
+- 🔐 JWT Authentication and Authorization
+- 👥 User Management System
+- 📅 Event Management
+- 📧 Email Service with Templates
+- 🌐 Internationalization (i18n)
+- 📝 TypeORM with Migration Support
+- 🔄 Database Seeding
+- 🧪 Comprehensive Testing Setup
+- 🐳 Docker Integration
+- 📊 Swagger API Documentation
+- 🔍 ESLint + Prettier Code Quality
+- 🔄 CI/CD with GitHub Actions
+- 🚀 SWC Support for Faster Development
+
+
+
+## Prerequisites
+
+```bash
+Node.js >= 20
+yarn
+PostgreSQL
+Docker (optional)
+```
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Doha26/planify-backend.git
+cd planify-backend/api
+```
+
+2. Install dependencies:
+```bash
+yarn install
+```
+
+3. Set up environment variables:
+```bash
+cp env-example .env
+```
+
+4. Configure your `.env` file with appropriate values.
+
+## Running the Application
+
+```bash
+# Run DB migrations
+yarn migration:run
+
+# Run seeds
+yarn seed:run
+
+# Development (This launches the NestJS Backend on port localhost:3000 and the maildev client app on localhost:1080)
+yarn start:dev
+
+# Development with SWC (faster)
+yarn start:swc
+
+# Debug mode
+yarn start:debug
+
+# Production mode
+yarn start:prod
+```
+
+## Preview 
+- [localhost:3000 - Swagger Documentation](http://localhost:3000/swagger) - API documentation interface.
+- [localhost:1080 - MailDev](http://localhost:1080) - Email testing tool.
+
+## Demo Video
+[Watch the demo](./media/demo-preview.mov)
+
+## Database Migrations
+
+```bash
+# Generate a new migration
+yarn migration:generate -- src/database/migrations/[MigrationName]
+
+# Create empty migration
+yarn migration:create -- src/database/migrations/[MigrationName]
+
+# Run migrations
+yarn migration:run
+
+# Revert migrations
+yarn migration:revert
+
+# Drop schema
+yarn schema:drop
+```
+
+### Seeding
+
+```bash
+# Create a seed
+yarn seed:create
+
+# Run seeds
+yarn seed:run
+```
+
+## Development Tools
+
+### Code Generation
+
+```bash
+# Generate a new resource
+yarn generate:resource
+
+# Add property to existing resource
+yarn add:property
+```
+
+### Code Quality
+
+```bash
+# Run ESLint
+yarn lint
+
+# Format code
+yarn format
+```
+
+## Testing
+
+```bash
+# Unit tests
+yarn test
+
+# Watch mode
+yarn test:watch
+
+# Test coverage
+yarn test:cov
+
+# E2E tests
+yarn test:e2e
+
+# Debug tests
+yarn test:debug
+
+# E2E tests with Docker
+yarn test:e2e:docker
+```
+
+## Docker Support
+
+```bash
+# Development environment
+docker compose up
+
+# Testing environment
+docker compose -f docker-compose.test.yaml up
+
+# CI environment
+docker compose -f docker-compose.ci.yaml up
+```
+
+## Folder Structure
+
+```
+src/
+├── auth/           # Authentication & authorization
+├── config/         # Application configuration
+├── database/       # Database setup & migrations
+├── events/         # Event management
+├── mail/           # Email service
+├── users/          # User management
+└── utils/          # Utility functions
+```
+
+## API Documentation
+
+Once the application is running, you can access the Swagger documentation at:
+
+```
+http://localhost:3000/docs
+```
+
+## Dependency Updates
+
+The project uses Renovate for automated dependency updates. Configuration can be found in `renovate.json`.
+
+## Release Management
+
+```bash
+# Create a new release
+yarn release
+```
+
+Release configuration is managed through `release-it` in package.json. The project follows semantic versioning.
+
+## Additional Documentation
+
+Detailed documentation is available in the `/docs` directory:
+
+- [Architecture Overview](docs/architecture.md)
+- [Authentication](docs/auth.md)
+- [Testing Guidelines](docs/tests.md)
+- [CLI Usage](docs/cli.md)
+
+## Scripts Reference
+
+| Script | Description |
+|--------|-------------|
+| `yarn start:dev` | Start the application in development mode |
+| `yarn start:swc` | Start with SWC for faster development |
+| `yarn test` | Run unit tests |
+| `yarn test:e2e` | Run end-to-end tests |
+| `yarn migration:run` | Execute database migrations |
+| `yarn seed:run` | Run database seeds |
+| `yarn lint` | Run ESLint |
+| `yarn format` | Format code with Prettier |
+
+## Environment Variables
+
+Key environment variables needed (see env-example for complete list):
+
+```bash
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_NAME=planify
+
+JWT_SECRET=your-jwt-secret
+JWT_EXPIRES_IN=1d
+
+MAIL_HOST=localhost
+MAIL_PORT=1025
+MAIL_USER=user
+MAIL_PASSWORD=password
+```
+
+## Complete Project Structure
+
+```
 |-- api
     |-- .dockerignore
     |-- .env
@@ -233,3 +488,8 @@
     |-- tsconfig.json
     |-- wait-for-it.sh
 |-- front
+
+```
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
