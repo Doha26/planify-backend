@@ -1,0 +1,44 @@
+|-- .dockerignore
+|-- .env
+|-- .gitignore
+|-- .hygen.js
+|-- .nvmrc
+|-- .prettierrc
+|-- Dockerfile
+|-- LICENSE
+|-- Procfile
+|-- README.md
+|-- api
+    |-- .husky
+        |-- _
+            |-- .gitignore
+            |-- applypatch-msg
+            |-- commit-msg
+            |-- h
+            |-- husky.sh
+            |-- post-applypatch
+            |-- post-checkout
+            |-- post-commit
+            |-- post-merge
+            |-- post-rewrite
+            |-- pre-applypatch
+            |-- pre-auto-gc
+            |-- pre-commit
+            |-- pre-merge-commit
+            |-- pre-push
+            |-- pre-rebase
+            |-- prepare-commit-msg
+    |-- docs
+        |-- architecture.md
+        |-- auth.md
+        |-- cli.md
+        |-- readme.md
+        |-- tests.md
+|-- commitlint.config.js
+|-- docker-compose.ci.yaml
+|-- docker-compose.test.yaml
+|-- docker-compose.yaml
+|-- e2e.Dockerfile
+|-- env-example
+|-- eslint.config.mjs
+|-- maildev.Dockerfile
