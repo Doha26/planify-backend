@@ -15,13 +15,13 @@ export class Availability {
   day: DayEnum;
 
   @ApiProperty()
-  fromTime: string; // e.g., '08:00'
+  fromTime?: string; // e.g., '08:00'
 
   @ApiProperty()
-  tillTime: string; // e.g., '18:00'
+  tillTime?: string; // e.g., '18:00'
 
   @ApiProperty()
-  isActive: boolean;
+  isActive?: boolean;
 
   @ApiProperty({
     type: () => [User],

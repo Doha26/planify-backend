@@ -13,8 +13,8 @@ import { DayEnum } from '@/utils/days.enum';
   name: 'availability',
 })
 export class AvailabilityEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     type: 'enum',
@@ -26,7 +26,7 @@ export class AvailabilityEntity {
   fromTime?: string; // e.g., '08:00'
 
   @Column({ type: 'varchar', length: 5, nullable: true })
-  tillTime: string; // e.g., '18:00'
+  tillTime?: string; // e.g., '18:00'
 
   @Column({ default: true, nullable: true })
   isActive?: boolean;
