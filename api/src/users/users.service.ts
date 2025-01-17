@@ -8,7 +8,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { NullableType } from '@/utils/types/nullable.type';
 import { FilterUserDto, SortUserDto } from './dto/query-user.dto';
-import { UserRepository } from './infrastructure/persistence/user.abstract.repository';
+import { UserRepository } from './user.abstract.repository';
 import { UserDomain as User } from './domain/user';
 import bcrypt from 'bcryptjs';
 import { AuthProvidersEnum } from '@/auth/auth-providers.enum';
@@ -105,6 +105,7 @@ export class UsersService {
       socialId: createUserDto.socialId,
       firstName: createUserDto.firstName,
       lastName: createUserDto.lastName,
+      emailVerified: null,
     });
   }
 

@@ -3,11 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 import { StatusEnum } from '@/utils/shared/statuses.enum';
-import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
 import {
   EventEntity,
+  EventPermission,
   EventType,
-} from '@/events/infrastructure/persistence/relational/entities/event.entity';
+} from '@/events/persistance/entities/event.entity';
+import { UserEntity } from '@/users/persistance/entities/user.entity';
 
 @Injectable()
 export class EventSeedService {
@@ -38,6 +39,7 @@ export class EventSeedService {
       description: 'An event to launch the product.',
       date: new Date('2025-01-20'),
       type: EventType.PERSONAL,
+      permissions: { 1: [EventPermission.ALL] },
       location: 'Office',
       startTime: new Date('2025-01-11T08:00:00'),
       endTime: new Date('2025-01-11T17:00:00'),
@@ -57,6 +59,7 @@ export class EventSeedService {
       startTime: new Date('2025-01-11T08:00:00'),
       endTime: new Date('2025-01-11T17:00:00'),
       participants: [user],
+      permissions: { 1: [EventPermission.ALL] },
       status: StatusEnum.ACTIVE,
       createdAt: new Date(),
       updatedAt: new Date(),

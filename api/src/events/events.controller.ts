@@ -35,10 +35,11 @@ import { infinityPagination } from '@/utils/infinity-pagination';
 import { FindAllEventsDto } from './dto/find-all-events.dto';
 import { AddParticipantsDto } from './dto/add-participant.dto';
 import { CheckConflictDTO } from './dto/check-conflict.dto';
+import { RolesGuard } from '@/utils/shared/roles.guard';
 
 @ApiTags('Events')
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 @Controller({
   path: 'events',
   version: '1',
@@ -96,7 +97,6 @@ export class EventsController {
     if (limit > 50) {
       limit = 50;
     }
-
     return infinityPagination(
       await this.eventsService.findAllWithPagination(
         {

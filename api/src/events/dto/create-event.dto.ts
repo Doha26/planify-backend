@@ -3,8 +3,7 @@ import { IsNotEmpty, IsObject, IsOptional } from 'class-validator';
 import {
   EventType,
   EventPermission,
-} from '@/events/infrastructure/persistence/relational/entities/event.entity';
-import { ParticipantPermissionDto } from './add-participant.dto';
+} from '@/events/persistance/entities/event.entity';
 
 export class CreateEventDto {
   @ApiProperty({ example: 'Team Meeting', type: String })
@@ -43,15 +42,22 @@ export class CreateEventDto {
   @IsOptional()
   recurrencePattern?: string;
 
-  @ApiProperty({
-    enum: EventPermission,
-    nullable: true,
-    example: ['read_only', 'modify', 'delete'],
-  })
   @IsOptional()
   @IsObject()
   @ApiProperty({
-    type: ParticipantPermissionDto,
+    nullable: true,
+    type: 'object',
+    additionalProperties: {
+      type: 'array',
+      items: {
+        type: 'string',
+        enum: Object.values(EventPermission),
+      },
+    },
+    example: {
+      1: ['read_only', 'write'],
+      2: ['write'],
+    },
   })
   permissions?: { [userId: number]: EventPermission[] };
 }

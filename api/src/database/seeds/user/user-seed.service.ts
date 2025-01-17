@@ -4,9 +4,9 @@ import { Repository } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import { RoleEnum } from '@/utils/shared/roles.enum';
 import { StatusEnum } from '@/utils/shared/statuses.enum';
-import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
-import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
-import { SessionEntity } from '@/session/infrastructure/persistence/relational/entities/session.entity';
+import { EventEntity } from '@/events/persistance/entities/event.entity';
+import { UserEntity } from '@/users/persistance/entities/user.entity';
+import { SessionEntity } from '@/session/persistance/entities/session.entity';
 
 @Injectable()
 export class UserSeedService {
