@@ -1,0 +1,84 @@
+
+# Node.js-related files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+.build/
+.cache/
+.next/
+out/
+coverage/
+
+# Environment files
+.env
+.env.*.local
+
+# Editor-specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Mac-specific files
+.AppleDouble
+.LSOverride
+
+# Miscellaneous
+*.pid
+*.seed
+*.pid.lock
+
+# Dependencies for API folder
+api/node_modules/
+api/dist/
+api/coverage/
+api/.env
+
+# Dependencies for front folder
+front/node_modules/
+front/.next/
+front/out/
+front/coverage/
+front/.env
+front/.DS_Store
+front/Thumbs.db
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.data
+/files
+.env
+/ormconfig.json
+.codegpt
+
+
+
+front/tsconfig.tsbuildinfo
