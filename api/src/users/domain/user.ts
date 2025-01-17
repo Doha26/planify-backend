@@ -3,6 +3,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { EventDomain as Event } from '@/events/domain/event';
 import { RoleEnum } from '@/utils/shared/roles.enum';
 import { StatusEnum } from '@/utils/shared/statuses.enum';
+import { Session } from '@/session/domain/session';
 
 export class UserDomain {
   @ApiProperty({
@@ -16,6 +17,12 @@ export class UserDomain {
   })
   @Expose({ groups: ['me', 'admin'] })
   email: string | null | undefined;
+
+  @ApiProperty({
+    type: String,
+    example: 'email',
+  })
+  emailVerified?: Date | null;
 
   @Exclude({ toPlainOnly: true })
   password?: string;
@@ -38,13 +45,19 @@ export class UserDomain {
     type: String,
     example: 'John',
   })
-  firstName: string;
+  firstName?: string;
+
+  @ApiProperty({
+    type: String,
+    example: 'some-image-url',
+  })
+  image?: string;
 
   @ApiProperty({
     type: String,
     example: 'Doe',
   })
-  lastName: string | null;
+  lastName?: string | null;
 
   @ApiProperty({
     enum: RoleEnum,
@@ -65,7 +78,7 @@ export class UserDomain {
   updatedAt: Date;
 
   @ApiProperty()
-  deletedAt: Date | null;
+  deletedAt?: Date | null;
 
   @ApiProperty({
     enum: RoleEnum,
@@ -74,7 +87,12 @@ export class UserDomain {
   groups: RoleEnum[];
 
   @ApiProperty({
-    type: [Event],
+    type: () => [Event],
   })
   events: Event[];
+
+  @ApiProperty({
+    type: () => [Session],
+  })
+  sessions?: Session[];
 }

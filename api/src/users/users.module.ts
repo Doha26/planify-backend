@@ -1,11 +1,11 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { RelationalUserPersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './infrastructure/persistence/relational/entities/user.entity';
 import { EventsModule } from '@/events/events.module';
 import { AuthModule } from '@/auth/auth.module';
+import { RelationalUserPersistenceModule } from './persistance/relational-persistence.module';
+import { UserEntity } from './persistance/entities/user.entity';
 
 const infrastructurePersistenceModule = RelationalUserPersistenceModule;
 

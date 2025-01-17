@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { RelationalSessionPersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
 import { SessionService } from './session.service';
 import { UserSeedModule } from '@/database/seeds/user/user-seed.module';
+import { RelationalSessionPersistenceModule } from './persistance/relational-persistence.module';
 
 // <database-block>
 const infrastructurePersistenceModule = RelationalSessionPersistenceModule;

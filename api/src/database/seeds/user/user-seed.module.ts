@@ -2,11 +2,11 @@ import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserSeedService } from './user-seed.service';
-import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
 import { EventSeedModule } from '../event/event-seed.module';
-import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
-import { SessionEntity } from '@/session/infrastructure/persistence/relational/entities/session.entity';
+import { EventEntity } from '@/events/persistance/entities/event.entity';
 import { SessionModule } from '@/session/session.module';
+import { SessionEntity } from '@/session/persistance/entities/session.entity';
+import { UserEntity } from '@/users/persistance/entities/user.entity';
 
 @Module({
   imports: [

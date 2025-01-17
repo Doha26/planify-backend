@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SessionRepository } from './infrastructure/persistence/session.repository';
+import { SessionRepository } from './session.repository';
 import { Session } from './domain/session';
 import { UserDomain as User } from '@/users/domain/user';
 import { NullableType } from '@/utils/types/nullable.type';
@@ -12,9 +12,7 @@ export class SessionService {
     return this.sessionRepository.findById(id);
   }
 
-  create(
-    data: Omit<Session, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt'>,
-  ): Promise<Session> {
+  create(data: Pick<Session, 'user' | 'hash'>): Promise<Session> {
     return this.sessionRepository.create(data);
   }
 

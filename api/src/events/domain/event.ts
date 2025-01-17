@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   EventPermission,
   EventType,
-} from '@/events/infrastructure/persistence/relational/entities/event.entity';
+} from '@/events/persistance/entities/event.entity';
 import { UserDomain as User } from '@/users/domain/user';
 
 export class EventDomain {
@@ -42,7 +42,7 @@ export class EventDomain {
     default: EventType.PERSONAL,
     nullable: true,
   })
-  type: EventType;
+  type?: EventType;
 
   @ApiProperty({
     type: [User],
@@ -56,14 +56,18 @@ export class EventDomain {
   location: string;
 
   @ApiProperty({ type: Boolean, default: false })
-  isRecurring: boolean;
+  isRecurring?: boolean;
 
   @ApiProperty({ type: String, nullable: true })
-  recurrencePattern: string;
+  recurrencePattern?: string;
 
   @ApiProperty({
     enum: EventPermission,
     enumName: 'EventPermission',
+    example: {
+      '1': ['read_only', 'write', 'delete'],
+      '2': ['read'],
+    },
   })
   permissions: { [key: string]: EventPermission[] };
 }
