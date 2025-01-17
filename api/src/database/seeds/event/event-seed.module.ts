@@ -2,9 +2,9 @@ import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { EventSeedService } from './event-seed.service';
-import { EventEntity } from '@/events/infrastructure/persistence/relational/entities/event.entity';
+import { EventEntity } from '@/events/persistance/entities/event.entity';
 import { UserSeedModule } from '../user/user-seed.module';
-import { UserEntity } from '@/users/infrastructure/persistence/relational/entities/user.entity';
+import { UserEntity } from '@/users/persistance/entities/user.entity';
 
 @Module({
   imports: [
