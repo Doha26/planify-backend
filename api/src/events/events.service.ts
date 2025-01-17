@@ -7,12 +7,12 @@ import {
 } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { EventRepository } from './infrastructure/persistence/event.abstract.repository';
+import { EventRepository } from './event.abstract.repository';
 import { IPaginationOptions } from '@/utils/types/pagination-options';
 import { EventDomain as Event } from './domain/event';
 import { UserDomain as User } from '@/users/domain/user';
 import { UsersService } from '@/users/users.service';
-import { EventPermission } from './infrastructure/persistence/relational/entities/event.entity';
+import { EventPermission } from './persistance/entities/event.entity';
 import { NullableType } from '@/utils/types/nullable.type';
 import { RequestContextService } from '@/utils/request-context-service';
 import { CheckConflictDTO } from './dto/check-conflict.dto';
@@ -42,7 +42,13 @@ export class EventsService {
   async create(createEventDto: CreateEventDto) {
     const eventType = createEventDto.type;
     const participants: User[] = [];
-    const eventCreator = await this.requestContext.get('user');
+    let eventCreator;
+
+    try {
+      eventCreator = await this.requestContext.getDataWithContext<User>('user');
+    } catch (error) {
+      console.error(error);
+    }
 
     if (eventCreator) {
       participants.push(eventCreator); // Add the user that create the event as the first participants
@@ -61,6 +67,7 @@ export class EventsService {
         participants.push(user); // Add the user to participants array
       }
     }
+
     const event = {
       title: createEventDto.title,
       startTime: createEventDto.startTime,
@@ -73,8 +80,16 @@ export class EventsService {
       recurrencePattern: createEventDto.recurrencePattern || '',
       permissions: createEventDto.permissions || {}, // Assuming permissions are provided as an object
     };
+
+    const updatedEvent = {
+      ...event,
+      permissions: {
+        ...createEventDto.permissions,
+        [eventCreator.id]: [EventPermission.ALL], // Set permissions for the creator
+      },
+    };
     // Save the event to the repository
-    return await this.eventRepository.create(event);
+    return await this.eventRepository.create(updatedEvent);
   }
 
   /**

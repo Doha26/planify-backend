@@ -25,9 +25,13 @@ export class RequestContextMiddleware implements NestMiddleware {
         });
 
         if (payload) {
-          const user = await this.userService.findById(payload.id);
-          (req as any).currentUser = user;
-          this.requestContext.set('user', user);
+          await this.requestContext.run({}, async () => {
+            const user = await this.userService.findById(payload.id);
+            (req as any).currentUser = user;
+            this.requestContext.set('user', user);
+            next();
+          });
+          return;
         }
       }
     } catch (error) {
