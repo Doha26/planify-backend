@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class UpdateDatabaseSchema1737124248054 implements MigrationInterface {
-  name = 'UpdateDatabaseSchema1737124248054';
+export class UpdateDatabaseSchema1737130273546 implements MigrationInterface {
+  name = 'UpdateDatabaseSchema1737130273546';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -20,7 +20,10 @@ export class UpdateDatabaseSchema1737124248054 implements MigrationInterface {
       `CREATE TYPE "public"."availability_day_enum" AS ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')`,
     );
     await queryRunner.query(
-      `CREATE TABLE "availability" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "day" "public"."availability_day_enum" NOT NULL, "fromTime" character varying(5), "tillTime" character varying(5), "isActive" boolean DEFAULT true, "userId" integer, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_05a8158cf1112294b1c86e7f1d3" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "availability" ("id" SERIAL NOT NULL, "day" "public"."availability_day_enum" NOT NULL, "fromTime" character varying(5), "tillTime" character varying(5), "isActive" boolean DEFAULT true, "userId" integer, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_05a8158cf1112294b1c86e7f1d3" PRIMARY KEY ("id"))`,
+    );
+    await queryRunner.query(
+      `CREATE TABLE "authenticator" ("credentialID" character varying NOT NULL, "userId" integer NOT NULL, "providerAccountId" character varying NOT NULL, "credentialPublicKey" character varying NOT NULL, "counter" integer NOT NULL DEFAULT '0', "credentialDeviceType" character varying DEFAULT 'Unknown', "credentialBackedUp" boolean NOT NULL DEFAULT false, "transports" character varying, CONSTRAINT "PK_d3a10d8eb4e3dffd34fe9c694ba" PRIMARY KEY ("credentialID", "userId"))`,
     );
     await queryRunner.query(
       `CREATE TYPE "public"."user_role_enum" AS ENUM('admin', 'user')`,
@@ -77,6 +80,9 @@ export class UpdateDatabaseSchema1737124248054 implements MigrationInterface {
       `ALTER TABLE "availability" ADD CONSTRAINT "FK_42a42b693f05f17e56d1d9ba93f" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`,
     );
     await queryRunner.query(
+      `ALTER TABLE "authenticator" ADD CONSTRAINT "FK_73234b7982147574458f0860361" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE`,
+    );
+    await queryRunner.query(
       `ALTER TABLE "user_events" ADD CONSTRAINT "FK_5d90e82a7c01f4b3a4cbf43a170" FOREIGN KEY ("event_id") REFERENCES "event"("id") ON DELETE CASCADE ON UPDATE CASCADE`,
     );
     await queryRunner.query(
@@ -90,6 +96,9 @@ export class UpdateDatabaseSchema1737124248054 implements MigrationInterface {
     );
     await queryRunner.query(
       `ALTER TABLE "user_events" DROP CONSTRAINT "FK_5d90e82a7c01f4b3a4cbf43a170"`,
+    );
+    await queryRunner.query(
+      `ALTER TABLE "authenticator" DROP CONSTRAINT "FK_73234b7982147574458f0860361"`,
     );
     await queryRunner.query(
       `ALTER TABLE "availability" DROP CONSTRAINT "FK_42a42b693f05f17e56d1d9ba93f"`,
@@ -129,6 +138,7 @@ export class UpdateDatabaseSchema1737124248054 implements MigrationInterface {
     await queryRunner.query(`DROP TYPE "public"."user_groups_enum"`);
     await queryRunner.query(`DROP TYPE "public"."user_status_enum"`);
     await queryRunner.query(`DROP TYPE "public"."user_role_enum"`);
+    await queryRunner.query(`DROP TABLE "authenticator"`);
     await queryRunner.query(`DROP TABLE "availability"`);
     await queryRunner.query(`DROP TYPE "public"."availability_day_enum"`);
     await queryRunner.query(`DROP TABLE "event_type_entity"`);
