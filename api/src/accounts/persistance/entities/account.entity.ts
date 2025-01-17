@@ -13,7 +13,7 @@ import {
 })
 export class AccountEntity {
   @PrimaryGeneratedColumn()
-  userId: string;
+  userId: number;
 
   @PrimaryColumn('text')
   type?: string;

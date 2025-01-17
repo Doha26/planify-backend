@@ -4,6 +4,10 @@ import { EventDomain as Event } from '@/events/domain/event';
 import { RoleEnum } from '@/utils/shared/roles.enum';
 import { StatusEnum } from '@/utils/shared/statuses.enum';
 import { Session } from '@/session/domain/session';
+import { Account } from '@/accounts/domain/account';
+import { EventType } from '@/events/domain/event-type';
+import { Availability } from './availability';
+import { Authenticator } from './authenticator';
 
 export class UserDomain {
   @ApiProperty({
@@ -95,4 +99,24 @@ export class UserDomain {
     type: () => [Session],
   })
   sessions?: Session[];
+
+  @ApiProperty({
+    type: () => [Account],
+  })
+  accounts?: Account[];
+
+  @ApiProperty({
+    type: () => [EventType],
+  })
+  eventTypes?: EventType[];
+
+  @ApiProperty({
+    type: () => [EventType],
+  })
+  availabilities?: Availability[];
+
+  @ApiProperty({
+    type: () => [Authenticator],
+  })
+  authenticators?: Authenticator[];
 }

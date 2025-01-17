@@ -19,6 +19,7 @@ import { SessionEntity } from '@/session/persistance/entities/session.entity';
 import { AccountEntity } from '@/accounts/persistance/entities/account.entity';
 import { EventTypeEntity } from '@/events/persistance/entities/eventType.entity';
 import { AvailabilityEntity } from './availability.entity';
+import { AuthenticatorEntity } from './authenticator.entity';
 
 @Entity({
   name: 'user',
@@ -94,4 +95,7 @@ export class UserEntity extends EntityRelationalHelper {
     cascade: true,
   })
   availabilities: AvailabilityEntity[];
+
+  @OneToMany(() => AuthenticatorEntity, (authenticator) => authenticator.user)
+  authenticators: AuthenticatorEntity[];
 }

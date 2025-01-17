@@ -48,9 +48,9 @@ export class EventType {
 
   @ApiProperty({
     description: 'The ID of the user who created the event',
-    example: 'user-12345',
+    example: 1,
   })
-  userId?: string;
+  userId?: number;
 
   @ApiProperty({
     description: 'Timestamp when the event type was created',
