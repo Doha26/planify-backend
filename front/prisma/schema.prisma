@@ -8,33 +8,70 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  name          String?
-  email         String    @unique
+  id            Int           @id @default(autoincrement())
+  email         String?       @unique
+  password      String?
+  provider      String        @default("email")
+  socialId      String?       @unique
+  firstName     String?       @unique
+  lastName      String?       @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  role     UserRole   @default(USER)
-  status   UserStatus @default(INACTIVE)
-  provider String     @default("email")
-  socialId String?
-
+  role          UserRole      @default(user)
+  status        UserStatus    @default(inactive)
+  groups        UserGroups    @default(user)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+  
   sessions      Session[]
   accounts      Account[]
   events        UserEvents[]
-  Authenticator Authenticator[]
+  eventTypes    EventTypeEntity[]
+  availability  Availability[]
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  hash         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  deletedAt    DateTime?
+  sessionToken String?
+  expires      DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+}
+
+model Account {
+  userId            Int
+  type              String
+  provider          String?
+  providerAccountId String?
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: NoAction)
+
+  @@id([userId, type])
 }
 
 model Event {
   id                Int       @id @default(autoincrement())
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-  title             String
+  title             String    @unique
   startTime         DateTime
   endTime           DateTime
-  type              EventType @default(PERSONAL)
+  type              EventType @default(personal)
   permissions       Json?
   description       String?
   location          String?
@@ -49,76 +86,73 @@ model UserEvents {
   eventId Int
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  event Event @relation(fields: [eventId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([userId, eventId])
+  @@index([eventId])
+  @@index([userId])
 }
 
-model Session {
-  sessionToken String   @unique
-  userId       Int
-  expires      DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model EventTypeEntity {
+  id                Int        @id @default(autoincrement())
+  title             String
+  duration          Int        @default(30)
+  url               String?
+  description       String?
+  active            Boolean    @default(true)
+  videoCallSoftware String     @default("Google Meet")
+  userId            Int?
+  createdAt         DateTime   @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum UserRole {
-  ADMIN
-  USER
-}
+model Availability {
+  id        String        @id @default(uuid())
+  day       AvailabilityDay
+  fromTime  String?
+  tillTime  String?
+  isActive  Boolean       @default(true)
+  userId    Int?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
 
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-}
-
-enum EventType {
-  PERSONAL
-  TEAM
-  PROJECT
-}
-
-model Account {
-  userId            Int
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-
-  @@id([provider, providerAccountId])
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
-  identifier String
+  identifier String @id
   token      String
   expires    DateTime
-
-  @@id([identifier, token])
 }
 
-model Authenticator {
-  credentialID         String
-  userId               Int
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
+enum UserRole {
+  admin
+  user
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+enum UserStatus {
+  active
+  inactive
+}
 
-  @@id([userId, credentialID])
+enum UserGroups {
+  admin
+  user
+}
+
+enum EventType {
+  personal
+  team
+  project
+}
+
+enum AvailabilityDay {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
 }
