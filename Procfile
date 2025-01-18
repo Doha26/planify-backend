@@ -1,2 +1,2 @@
-web: cd api && yarn start:prod
-release: cd api && echo '' > .env && yarn migration:run && yarn seed:run
+web: cd api && npm run start:prod
+release: cd api && echo '' > .env && npm run migration:run && npm run seed:run
