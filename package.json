@@ -7,13 +7,7 @@
       "front"
     ],
     "scripts": {
-      "install:all": "yarn install",
-      "build:api": "yarn workspace api build",
-      "build:front": "yarn workspace front build",
-      "start:api": "yarn workspace api start:prod",
-      "start:front": "yarn workspace front dev",
-      "deploy:api": "cd api && yarn install && yarn start:prod",
-      "deploy:front": "cd front && yarn install && yarn build"
+      "heroku-postbuild": "cd api && npm install && npm run build"
     }
   }
   
