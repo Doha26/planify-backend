@@ -3,11 +3,10 @@
     "version": "1.0.0",
     "private": true,
     "workspaces": [
-      "api",
-      "front"
+        "api",
+        "front"
     ],
     "scripts": {
-      "heroku-postbuild": "cd api && npm install && npm run build"
+        "heroku-postbuild": "cd api && npm install && npm run build"
     }
-  }
-  
+}

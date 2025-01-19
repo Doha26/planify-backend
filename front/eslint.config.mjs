@@ -1,16 +1,25 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { defineConfig } from 'eslint-define-config';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
+export default defineConfig({
+  root: true,
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'next/core-web-vitals', // Next.js recommended rules
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended', // TypeScript rules
+    'plugin:jsx-a11y/recommended', // Accessibility rules
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'jsx-a11y'],
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'off', // Disable the no-explicit-any rule
+    // Add other rules here
+  },
 });
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
-
-export default eslintConfig;
