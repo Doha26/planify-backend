@@ -1,4 +1,3 @@
-
 # Node.js-related files
 node_modules/
 npm-debug.log*
@@ -82,3 +81,4 @@ front/Thumbs.db
 
 
 front/tsconfig.tsbuildinfo
+

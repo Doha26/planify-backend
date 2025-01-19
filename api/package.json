@@ -15,7 +15,7 @@
     "migration:revert": "yarn run typeorm -- --dataSource=src/database/data-source.ts migration:revert",
     "schema:drop": "yarn run typeorm -- --dataSource=src/database/data-source.ts schema:drop",
     "seed:create": "hygen seeds create",
-    "generate:resource": "hygen generate resource",
+    "generate:resource": "hygen generate resource", 
     "postgenerate:resource": "yarn run lint -- --fix",
     "add:property": "hygen property add",
     "postadd:property": "yarn run lint -- --fix",
